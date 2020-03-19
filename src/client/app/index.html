@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html ng-controller="MainCtrl">
+<head>
+  <title ng-bind="$root.title"></title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/bundle.css" />
+  <script src="js/index.min.js"></script>
+</head>
+<body ng-cloak ng-visible="isLoaded">
+  <ui-view></ui-view>
+</body>
+</html>

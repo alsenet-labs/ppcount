@@ -1,0 +1,18 @@
+@import "node_modules/reset-css/sass/_reset.scss";
+@import "node_modules/angular-material/angular-material.scss";
+@import './home.scss';
+
+.invisible {
+  visibility: hidden;
+}
+
+.disable-selection {
+  user-select: none;
+}
+
+@media screen and (min-width: 640px) {
+  html, ui-view {
+  }
+  ui-view {
+  }
+}
