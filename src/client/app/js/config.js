@@ -34,7 +34,7 @@ module.exports=[
 
     $locationProvider.html5Mode({
       enabled: true,
-      requireBase: false
+      requireBase: true
     });
 
     $urlRouterProvider.otherwise(function($injector){
