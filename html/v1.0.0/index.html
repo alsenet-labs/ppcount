@@ -9,6 +9,24 @@
   <script src="js/index.min.js"></script>
 </head>
 <body ng-cloak ng-visible="isLoaded">
-  <ui-view></ui-view>
+  <div layout="column" layout-fill>
+    <header>
+      <md-toolbar class="md-scroll-shrink">
+        <div layout="row" layout-align="center center" flex>
+          PPCount v1.0.0<a href="https://github.com/alsenet-labs/ppcount" target="blank"><md-icon md-svg-src="./img/icons/ic_open_in_new_24px.svg"></md-icon></a>
+        </div>
+      </md-toolbar>
+    </header>
+    <main flex>
+    <ui-view></ui-view>
+    </main>
+    <footer>
+      <md-toolbar class="md-scroll-shrink">
+        <div layout="row" layout-align="center center" flex>
+          <span>&copy; <span id="year">2020</span><script>document.getElementById('year').innerText=new Date().getFullYear();</script> Alsenet SA, GNU AGPL v3</span>
+        </div>
+      </md-toolbar>
+    </footer>
+  </div>
 </body>
 </html>

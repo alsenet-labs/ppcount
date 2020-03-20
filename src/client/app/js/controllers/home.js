@@ -32,19 +32,24 @@
 
 module.exports=[
   '$scope',
+  '$rootScope',
   '$location',
   '$cookies',
+  '$mdDialog',
   function (
     $scope,
+    $rootScope,
     $location,
-    $cookies
+    $cookies,
+    $mdDialog
   ) {
-
     angular.extend($scope,{
       init: function(){
-        $scope.count=$cookies.get('count')||0;
-        $scope.max=$location.search().max||50;
-        $scope.progress=$scope.count/$scope.max*100;
+        $scope.data=$rootScope.data={
+          count: Number($cookies.get('count'))||0,
+          max: Number($cookies.get('max'))||50
+        }
+        $scope.progress=$scope.data.count/$scope.data.max*100;
         $scope.diameter=50;
         $scope.progressStyle={
           width: $scope.diameter+'px',
@@ -52,16 +57,73 @@ module.exports=[
         }
       }, // init
 
+      update: function(){
+        $scope.progress=$scope.data.count/$scope.data.max*100;
+        $cookies.put('count',$scope.data.count);
+        $cookies.put('max',$scope.data.max);
+      },
+
+      settings: function(){
+        var DialogCtrl=[
+          '$scope',
+          '$mdDialog',
+          '$timeout',
+          function DialogCtrl(
+            $scope,
+            $mdDialog,
+            $timeout
+          ) {
+            angular.extend($scope, {
+              init: function() {
+                $scope.data=angular.extend({},$rootScope.data);
+                $scope.t=$rootScope.t;
+                $timeout(function(){
+                  ival.max=imax.value||50;
+                  imax.min=ival.value||1;
+                },1000);
+              },
+              hide: function() {
+                $mdDialog.hide();
+              },
+              cancel: function() {
+                $mdDialog.cancel();
+              },
+              answer: function(answer) {
+                console.log(answer)
+                $mdDialog.hide(answer);
+              }
+            });
+            $scope.init();
+          }
+        ]
+
+        $mdDialog.show({
+          controller: DialogCtrl,
+          templateUrl: 'views/dialog.html',
+          parent: angular.element(document.body),
+          clickOutsideToClose:true,
+          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+        .then(function(answer) {
+          if (answer) {
+            $rootScope.data.count=answer.count;
+            $rootScope.data.max=answer.max;
+            $scope.update();
+          }
+        }, function() {
+          // cancelled the dialog
+        });
+
+      }, // settings
+
       add: function add(){
-        if ($scope.count < $scope.max) ++$scope.count;
-        $scope.progress=$scope.count/$scope.max*100;
-        $cookies.put('count',$scope.count);
+        if ($scope.data.count < $scope.data.max) ++$scope.data.count;
+        $scope.update();
       },
 
       remove: function remove(){
-        if ($scope.count > 0) --$scope.count;
-        $scope.progress=$scope.count/$scope.max*100;
-        $cookies.put('count',$scope.count);
+        if ($scope.data.count > 0) --$scope.data.count;
+        $scope.update();
       }
 
     }); // extend scope

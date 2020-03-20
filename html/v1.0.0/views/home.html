@@ -1,17 +1,17 @@
-<div id="#home" ng-class="{'overflow': count>=max}" layout-fill layout="column" layout-align="center center">
+<div id="#home" ng-class="{'overflow': data.count>=data.max}" layout-fill layout="column" layout-align="center center">
   <div>
-  <section layout="row" layout="row" layout-align="center center" layout-wrap="">
+  <section layout="row" layout-align="center center" layout-wrap="">
     <md-button class="md-fab md-hue-1 md-primary" ng-class="{width: 100, height:100}" aria-label="{{ t.addPerson }}" ng-click="add()">
-      <md-icon md-svg-src="/ppcount/html/v1.0.0/img/add-user-add-svgrepo-com.svg"></md-icon>
+      <md-icon md-svg-src="../img/add-user-add-svgrepo-com.svg"></md-icon>
     </md-button>
     <md-button class="md-fab md-hue-1 md-primary" aria-label="{{ t.removePerson }}" ng-click="remove()">
-      <md-icon md-svg-src="/ppcount/html/v1.0.0/img/remove-user-delete-svgrepo-com.svg"></md-icon>
+      <md-icon md-svg-src="../img/remove-user-delete-svgrepo-com.svg"></md-icon>
     </md-button>
   </section>
   <section layout="row" layout-align="center center">
-    <div ng-style="{'width': diameter+'px', 'height': diameter+'px'}"  style="position: relative">
+    <div ng-style="{'width': diameter+'px', 'height': diameter+'px'}"  style="position: relative" ng-click="settings()">
       <md-progress-circular md-mode="determinate" md-diameter="{{diameter}}" value="{{progress}}"></md-progress-circular>
-      <h4 id="progress" class="disable-selection">{{count}}</h4>
+      <h4 id="progress" class="disable-selection">{{data.count}}</h4>
     </div>
   </section>
   </div>

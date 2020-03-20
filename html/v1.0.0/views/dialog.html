@@ -1,0 +1,43 @@
+<form name="settings" ng-submit="answer(data)" ng-cloak>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <div>{{ t.settingsDialogTitle }}</div>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-src="../img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <br />
+    <section layout="column" layout-align="center center" layout-wrap="">
+      <md-input-container>
+        <label>Count</label>
+        <input id="ival" name="val" type="number" ng-model="data.count" required="isNaN(data.count)" min="0" max="50" ng-min="0" ng-max="data.max||50" onchange="imax.min=this.value">
+        <div ng-messages="settings.val.$error" ng-show="settings.val.$dirty">
+          <div ng-message="required">{{ t.required }}</div>
+          <div ng-message="min">{{ t.lesserThan }} 0 !</div>
+          <div ng-message="max">{{ t.greaterThan }} {{ data.max||50 }} !</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Max</label>
+        <input id="imax" name="max" type="number" ng-model="data.max" required="" min="1" max="999" ng-min="data.val||1" ng-max="999" onchange="ival.max=this.value">
+        <div ng-messages="settings.max.$error" ng-show="settings.max.$dirty">
+          <div ng-message="required">{{ t.required }}</div>
+          <div ng-message="min">{{ t.lesserThan }} {{ data.val||1 }} !</div>
+          <div ng-message="max">{{ t.greaterThan }} 999 !</div>
+        </div>
+      </md-input-container>
+    </section>
+  </md-dialog-content>
+  <md-dialog-actions layout="row">
+    <span flex></span>
+    <md-button ng-click="answer()">
+     {{ $root.t.cancel }}
+    </md-button>
+    <md-button type="submit">
+      {{ $root.t.ok }}
+    </md-button>
+  </md-dialog-actions>
+</form>

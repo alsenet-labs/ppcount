@@ -2,8 +2,11 @@ html, body {
   overflow: hidden;
   position: relative; }
 
-body {
+._home main {
   transform: scale(2.5); }
+
+._home .overflow {
+  background: red; }
 
 #progress {
   margin: 0;
@@ -12,6 +15,3 @@ body {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%); }
-
-.overflow {
-  background: red; }

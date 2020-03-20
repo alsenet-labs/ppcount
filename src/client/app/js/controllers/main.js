@@ -47,6 +47,14 @@ module.exports=[
     angular.extend($scope,{
 
       init: function(){
+        $rootScope.t={
+          ok: 'OK',
+          cancel: 'Cancel',
+          settingsDialogTitle: 'Parameters',
+          required: 'This is required !',
+          lesserThan: 'That is less than',
+          greaterThan: 'That is greater than'
+        }
 
       } // init
 

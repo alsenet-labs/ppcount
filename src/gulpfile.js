@@ -43,8 +43,10 @@ function browserSync(){
 
 function copy() {
    var streams=[];
-   streams.push(gulp.src('./node_modules/bootstrap/dist/css/*')
-   .pipe(gulp.dest('./client/app/css/')));
+   streams.push(gulp.src('./node_modules/material-design-icons/navigation/svg/production/*')
+   .pipe(gulp.dest('./client/app/img/icons/')));
+   streams.push(gulp.src('./node_modules/material-design-icons/action/svg/production/*')
+   .pipe(gulp.dest('./client/app/img/icons/')));
    return merge.apply(null,streams);
 }
 

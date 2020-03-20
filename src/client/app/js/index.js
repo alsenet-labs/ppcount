@@ -34,11 +34,13 @@ $('title').text(config.appName);
 require('../css/main.css');
 
 require('@uirouter/angularjs/release/angular-ui-router.js');
+require('angular-messages');
 require('angular-material');
 require('angular-cookies');
 
 var app=angular.module(config.appName,[
   'ui.router',
+  'ngMessages',
   'ngMaterial',
   'ngCookies'
 ])
